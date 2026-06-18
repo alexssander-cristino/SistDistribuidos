@@ -1,0 +1,13 @@
+services:
+
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+
+  worker:
+    build: .
+    command: php artisan tickets:consume
+
+  redis:
+    image: redis:latest
