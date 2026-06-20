@@ -2,13 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use MongoDB\Laravel\Eloquent\Model;
 
 class Purchase extends Model
 {
+    protected $connection = 'mongodb';
+    protected $collection = 'purchases';
+
     protected $fillable = [
         'seat',
         'cliente',
-        'status'
+        'status',
+        'created_at'
+    ];
+
+    protected $casts = [
+        'created_at' => 'datetime',
     ];
 }

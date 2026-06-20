@@ -1,50 +1,33 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TicketController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TicketController;
+use App\Http\Controllers\PageController;
 
 /*
 |--------------------------------------------------------------------------
 | Dashboard
 |--------------------------------------------------------------------------
 */
-
-Route::get('/', [DashboardController::class, 'index'])
-    ->name('dashboard');
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 /*
 |--------------------------------------------------------------------------
-| Reserva de assentos
+| API (SQS + backend)
 |--------------------------------------------------------------------------
 */
-
-Route::post('/reservar', [TicketController::class, 'reserve'])
-    ->name('tickets.reserve');
+Route::post('/reservar', [TicketController::class, 'reserve'])->name('tickets.reserve');
 
 /*
 |--------------------------------------------------------------------------
-| Lista de assentos
+| Páginas (FRONTEND)
 |--------------------------------------------------------------------------
 */
+Route::get('/assentos', [PageController::class, 'seats'])->name('page.seats');
 
-Route::get('/assentos', [TicketController::class, 'listSeats'])
-    ->name('tickets.seats');
+Route::get('/compras', [PageController::class, 'purchases'])->name('page.purchases');
 
-/*
-|--------------------------------------------------------------------------
-| Histórico de compras
-|--------------------------------------------------------------------------
-*/
+Route::get('/dlq', [PageController::class, 'dlq'])->name('page.dlq');
 
-Route::get('/compras', [TicketController::class, 'purchases'])
-    ->name('tickets.purchases');
-
-/*
-|--------------------------------------------------------------------------
-| Histórico DLQ
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/dlq', [TicketController::class, 'dlq'])
-    ->name('tickets.dlq');
+Route::get('/fila-sqs', [PageController::class, 'sqs'])->name('page.sqs');

@@ -10,6 +10,8 @@
         "aws/aws-sdk-php": "^3.385",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
+        "mongodb/laravel-mongodb": "^5.8",
+        "mongodb/mongodb": "^2.3",
         "predis/predis": "^3.5"
     },
     "require-dev": {
